@@ -30,7 +30,7 @@ from archivebot.seesaw.tasks import GetItemFromQueue, StartHeartbeat, \
     SetFetchDepth, PreparePaths, WriteInfo, DownloadUrlFile, \
     RelabelIfAborted, MoveFiles, StopHeartbeat, MarkItemAsDone, CheckIP
 
-VERSION = "20190427.01"
+VERSION = "20190524.01"
 PHANTOMJS_VERSIONS = ('1.9.8', '2.1.1')
 WPULL_VERSION = ('2.0.3')
 EXPIRE_TIME = 60 * 60 * 48  # 48 hours between archive requests
@@ -38,6 +38,7 @@ WPULL_EXE = find_executable('Wpull', WPULL_VERSION, ['wpull', './wpull'], '--ver
 PHANTOMJS = find_executable('PhantomJS', PHANTOMJS_VERSIONS,
         ['phantomjs', './phantomjs', '../phantomjs'], '-v')
 YOUTUBE_DL = find_executable('youtube-dl', None, ['./youtube-dl'], '--version')
+RSYNC = find_executable('rsync', None, ['rsync'], '--version')
 
 version_integer = (sys.version_info.major * 10) + sys.version_info.minor
 
@@ -54,6 +55,7 @@ if not os.environ.get('NO_SEGFAULT_340'):
 assert WPULL_EXE, 'No usable Wpull found.'
 assert PHANTOMJS, 'PhantomJS {} was not found.'.format(PHANTOMJS_VERSIONS)
 assert YOUTUBE_DL, 'No usable youtube-dl found.'
+assert RSYNC, 'No usable rsync found.'
 assert 'RSYNC_URL' in env, 'RSYNC_URL not set.'
 assert 'REDIS_URL' in env, 'REDIS_URL not set.'
 assert 'FINISHED_WARCS_DIR' in env, 'FINISHED_WARCS_DIR not set.'
